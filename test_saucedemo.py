@@ -32,8 +32,6 @@ def test_add_item_to_cart(driver):
     test_login(driver)
     driver.find_element(By.NAME, "add-to-cart-sauce-labs-backpack").click()
     cart_count = driver.find_element(By.CLASS_NAME, "shopping_cart_badge").text
-    #assert cart_count == "1", "Item was not added to cart"
-    #result = "inventory.html" in driver.current_url
     jobStatus = "passed" if cart_count == "1" else "failed"
     driver.execute_script("sauce:job-result=" + jobStatus)
 
@@ -41,7 +39,6 @@ def test_remove_item_from_cart(driver):
     """Test removing an item from cart"""
     test_add_item_to_cart(driver)
     driver.find_element(By.NAME, "remove-sauce-labs-backpack").click()
-    #assert not driver.find_elements(By.CLASS_NAME, "shopping_cart_badge"), "Item was not removed"
     jobStatus = "passed" if not driver.find_elements(By.CLASS_NAME, "shopping_cart_badge") else "failed"
     driver.execute_script("sauce:job-result=" + jobStatus)
 
@@ -50,9 +47,7 @@ def test_logout(driver):
     test_login(driver)
     driver.find_element(By.ID, "react-burger-menu-btn").click()
     driver.find_element(By.ID, "logout_sidebar_link").click()
-    #assert "login.html" in driver.current_url, "Logout failed"
-    result = "login.html" in driver.current_url
-    jobStatus = "passed" if result else "failed"
+    jobStatus = "passed" if driver.find_elements(By.CLASS_NAME, "login_logo") else "failed"
     driver.execute_script("sauce:job-result=" + jobStatus)
 
 def test_sort_items(driver):
@@ -60,7 +55,6 @@ def test_sort_items(driver):
     test_login(driver)
     dropdown = driver.find_element(By.CLASS_NAME, "product_sort_container")
     dropdown.send_keys(Keys.DOWN)
-    #assert "inventory.html" in driver.current_url, "Sorting failed"
     result = "inventory.html" in driver.current_url
     jobStatus = "passed" if result else "failed"
     driver.execute_script("sauce:job-result=" + jobStatus)
@@ -69,7 +63,6 @@ def test_view_product_details(driver):
     """Test viewing a product details"""
     test_login(driver)
     driver.find_element(By.CLASS_NAME, "inventory_item_name").click()
-    #assert "inventory-item.html" in driver.current_url, "Product details not displayed"
     result = "inventory-item.html?id=" in driver.current_url
     jobStatus = "passed" if result else "failed"
     driver.execute_script("sauce:job-result=" + jobStatus)
@@ -79,7 +72,6 @@ def test_checkout_process(driver):
     test_add_item_to_cart(driver)
     driver.find_element(By.CLASS_NAME, "shopping_cart_link").click()
     driver.find_element(By.CLASS_NAME, "checkout_button").click()
-    #assert "checkout-step-one.html" in driver.current_url, "Checkout process failed"
     result = "checkout-step-one.html" in driver.current_url
     jobStatus = "passed" if result else "failed"
     driver.execute_script("sauce:job-result=" + jobStatus)
@@ -89,7 +81,6 @@ def test_continue_shopping(driver):
     test_checkout_process(driver)
     driver.find_element(By.CLASS_NAME, "cart_cancel_link").click()
     driver.find_element(By.NAME, "continue-shopping").click()
-    #assert "inventory.html" in driver.current_url, "Continue shopping failed"
     result = "inventory.html" in driver.current_url
     jobStatus = "passed" if result else "failed"
     driver.execute_script("sauce:job-result=" + jobStatus)
@@ -103,7 +94,6 @@ def test_complete_order(driver):
     driver.find_element(By.ID, "login-button").click()
     driver.find_element(By.NAME, "continue").click()
     driver.find_element(By.NAME, "finish").click()
-    #assert "checkout-complete.html" in driver.current_url, "Order was not completed"
     result = "checkout-complete.html" in driver.current_url
     jobStatus = "passed" if result else "failed"
     driver.execute_script("sauce:job-result=" + jobStatus)
