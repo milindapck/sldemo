@@ -1,13 +1,10 @@
 import pytest
 import os
 from selenium import webdriver
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-from dotenv import load_dotenv
+from selenium.webdriver.chrome.options import Options as ChromeOptions
 
-# Load Sauce Labs credentials from .env file
-load_dotenv()
-SAUCE_USERNAME = os.getenv("SAUCE_USERNAME")
-SAUCE_ACCESS_KEY = os.getenv("SAUCE_ACCESS_KEY")
+SAUCE_USERNAME = "oauth-milindapck-80262"
+SAUCE_ACCESS_KEY = "0f5e5607-dd62-4bf2-8b0f-2bfeaa24e92a"
 
 # Verify if credentials are being retrieved
 if not SAUCE_USERNAME or not SAUCE_ACCESS_KEY:
