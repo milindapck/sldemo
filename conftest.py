@@ -9,23 +9,27 @@ load_dotenv()
 SAUCE_USERNAME = os.getenv("SAUCE_USERNAME")
 SAUCE_ACCESS_KEY = os.getenv("SAUCE_ACCESS_KEY")
 
+# Verify if credentials are being retrieved
+if not SAUCE_USERNAME or not SAUCE_ACCESS_KEY:
+    raise Exception("Sauce Labs credentials are missing! Ensure SAUCE_USERNAME and SAUCE_ACCESS_KEY are set.")
+
+SAUCE_URL = "https://ondemand.eu-central-1.saucelabs.com:443/wd/hub"
+
 @pytest.fixture
 def driver():
-    """Setup Selenium WebDriver for Sauce Labs (Chrome)"""
-    sauce_url = f"https://{SAUCE_USERNAME}:{SAUCE_ACCESS_KEY}@ondemand.eu-central-1.saucelabs.com:443/wd/hub"
-
-    # Sauce Labs desired capabilities
-    capabilities = {
+    """Setup Sauce Labs Selenium WebDriver."""
+    options = webdriver.ChromeOptions()
+    sauce_options = {
+        "username": SAUCE_USERNAME,
+        "accessKey": SAUCE_ACCESS_KEY,
         "browserName": "chrome",
-        "browserVersion": "latest",
         "platformName": "Windows 10",
-        "sauce:options": {
-            "name": "SauceDemo Test",
-            "build": "SauceLabs-Selenium",
-        },
+        "browserVersion": "latest",
+        "name": "SauceLabs Test",
+        "build": "Milinda"
     }
+    options.set_capability("sauce:options", sauce_options)
 
-    driver = webdriver.Remote(command_executor=sauce_url, desired_capabilities=capabilities)
-    driver.maximize_window()
+    driver = webdriver.Remote(command_executor=SAUCE_URL, options=options)
     yield driver
     driver.quit()
