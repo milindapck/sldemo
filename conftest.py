@@ -22,7 +22,7 @@ def driver():
         "browserName": "chrome",
         "platformName": "Windows 10",
         "browserVersion": "latest",
-        "name": "SauceLabs Test",
+        "name": "SauceLabs Automation for Walmart",
         "build": "Milinda"
     }
     options.set_capability("sauce:options", sauce_options)

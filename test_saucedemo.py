@@ -91,7 +91,6 @@ def test_complete_order(driver):
     driver.find_element(By.ID, "first-name").send_keys("Milinda")
     driver.find_element(By.ID, "last-name").send_keys("Perera")
     driver.find_element(By.ID, "postal-code").send_keys("DA15GB")
-    driver.find_element(By.ID, "login-button").click()
     driver.find_element(By.NAME, "continue").click()
     driver.find_element(By.NAME, "finish").click()
     result = "checkout-complete.html" in driver.current_url
