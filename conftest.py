@@ -12,7 +12,7 @@ SAUCE_ACCESS_KEY = os.getenv("SAUCE_ACCESS_KEY")
 @pytest.fixture
 def driver():
     """Setup Selenium WebDriver for Sauce Labs (Chrome)"""
-    sauce_url = f"https://{SAUCE_USERNAME}:{SAUCE_ACCESS_KEY}@ondemand.us-west-1.saucelabs.com/wd/hub"
+    sauce_url = f"https://{SAUCE_USERNAME}:{SAUCE_ACCESS_KEY}@ondemand.eu-central-1.saucelabs.com:443/wd/hub"
 
     # Sauce Labs desired capabilities
     capabilities = {
