@@ -2,35 +2,30 @@ import pytest
 import os
 from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from dotenv import load_dotenv
 
-def pytest_addoption(parser):
-    """Add command-line options for browser selection."""
-    parser.addoption("--browser", action="store", default="chrome", help="Browser to run tests on")
-
-@pytest.fixture
-def browser(request):
-    """Fixture to get the browser option from CLI."""
-    return request.config.getoption("--browser")
+# Load Sauce Labs credentials from .env file
+load_dotenv()
+SAUCE_USERNAME = os.getenv("SAUCE_USERNAME")
+SAUCE_ACCESS_KEY = os.getenv("SAUCE_ACCESS_KEY")
 
 @pytest.fixture
-def driver(browser):
-    """Setup Selenium WebDriver with Sauce Labs."""
-    sauce_username = os.getenv("SAUCE_USERNAME")
-    sauce_access_key = os.getenv("SAUCE_ACCESS_KEY")
+def driver():
+    """Setup Selenium WebDriver for Sauce Labs (Chrome)"""
+    sauce_url = f"https://{SAUCE_USERNAME}:{SAUCE_ACCESS_KEY}@ondemand.us-west-1.saucelabs.com/wd/hub"
 
-    sauce_url = f"https://{sauce_username}:{sauce_access_key}@ondemand.us-west-1.saucelabs.com/wd/hub"
-
+    # Sauce Labs desired capabilities
     capabilities = {
-        "browserName": browser,
-        "platformName": "Windows 10",
+        "browserName": "chrome",
         "browserVersion": "latest",
+        "platformName": "Windows 10",
         "sauce:options": {
-            "name": "SauceDemo Selenium Test"
-        }
+            "name": "SauceDemo Test",
+            "build": "SauceLabs-Selenium",
+        },
     }
 
-    driver = webdriver.Remote(command_executor=sauce_url, options=webdriver.ChromeOptions() if browser == "chrome" else webdriver.FirefoxOptions())
+    driver = webdriver.Remote(command_executor=sauce_url, desired_capabilities=capabilities)
     driver.maximize_window()
-    
     yield driver
     driver.quit()
