@@ -4,7 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 
 #SAUCE_USERNAME = "oauth-milindapck-80262"
-S#AUCE_ACCESS_KEY = "0f5e5607-dd62-4bf2-8b0f-2bfeaa24e92a"
+#SAUCE_ACCESS_KEY = "0f5e5607-dd62-4bf2-8b0f-2bfeaa24e92a"
 SAUCE_USERNAME = os.getenv("SAUCE_USERNAME")
 SAUCE_ACCESS_KEY = os.getenv("SAUCE_ACCESS_KEY")
 
