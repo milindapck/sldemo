@@ -19,8 +19,8 @@ def test_login(driver):
 def test_invalid_login(driver):
     # Test invalid login
     driver.get(BASE_URL)
-    driver.find_element(By.ID, "user-name").send_keys("standard_user")
-    driver.find_element(By.ID, "password").send_keys("secret_sauce")
+    driver.find_element(By.ID, "user-name").send_keys("wrong_user")
+    driver.find_element(By.ID, "password").send_keys("wrong_password")
     driver.find_element(By.ID, "login-button").click()
     error_msg = driver.find_element(By.CLASS_NAME, "error-message-container").text
     result = "Epic sadface" in error_msg
@@ -32,7 +32,7 @@ def test_add_item_to_cart(driver):
     test_login(driver)
     driver.find_element(By.NAME, "add-to-cart-sauce-labs-backpack").click()
     cart_count = driver.find_element(By.CLASS_NAME, "shopping_cart_badge").text
-    jobStatus = "passed" if cart_count == "1" else "failed"
+    jobStatus = "passed" if cart_count == "2" else "failed"
     driver.execute_script("sauce:job-result=" + jobStatus)
 
 def test_remove_item_from_cart(driver):
