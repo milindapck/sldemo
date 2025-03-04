@@ -9,7 +9,7 @@ def test_login(driver):
     driver.get(BASE_URL)
     driver.maximize_window()
     driver.find_element(By.ID, "user-name").send_keys("standard_user")
-    driver.find_element(By.ID, "password").send_keys("secret_sauc")
+    driver.find_element(By.ID, "password").send_keys("secret_sauce")
     driver.find_element(By.ID, "login-button").click()
     #assert "inventory.html" in driver.current_url, "Login failed"
     result = "inventory.html" in driver.current_url
@@ -19,8 +19,8 @@ def test_login(driver):
 def test_invalid_login(driver):
     # Test invalid login
     driver.get(BASE_URL)
-    driver.find_element(By.ID, "user-name").send_keys("wrong_user")
-    driver.find_element(By.ID, "password").send_keys("wrong_password")
+    driver.find_element(By.ID, "user-name").send_keys("standard_user")
+    driver.find_element(By.ID, "password").send_keys("secret_sauce")
     driver.find_element(By.ID, "login-button").click()
     error_msg = driver.find_element(By.CLASS_NAME, "error-message-container").text
     result = "Epic sadface" in error_msg
