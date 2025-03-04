@@ -9,7 +9,7 @@ def test_login(driver):
     driver.get(BASE_URL)
     driver.maximize_window()
     driver.find_element(By.ID, "user-name").send_keys("standard_user")
-    driver.find_element(By.ID, "password").send_keys("secret_sauce")
+    driver.find_element(By.ID, "password").send_keys("secret_sauc")
     driver.find_element(By.ID, "login-button").click()
     #assert "inventory.html" in driver.current_url, "Login failed"
     result = "inventory.html" in driver.current_url
