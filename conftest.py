@@ -20,7 +20,7 @@ def driver():
         "username": SAUCE_USERNAME,
         "accessKey": SAUCE_ACCESS_KEY,
         "browserName": "chrome",
-        "platformName": "Windows 10",
+        "platformName": "macOS 11.00",
         "browserVersion": "latest",
         "name": "SauceLabs Automation for Walmart",
         "build": "Milinda"
