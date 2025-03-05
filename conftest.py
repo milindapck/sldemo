@@ -2,6 +2,7 @@ import pytest
 import os
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
 
 SAUCE_USERNAME = "oauth-milindapck-80262"
 SAUCE_ACCESS_KEY = "0f5e5607-dd62-4bf2-8b0f-2bfeaa24e92a"
@@ -15,11 +16,11 @@ SAUCE_URL = "https://ondemand.eu-central-1.saucelabs.com:443/wd/hub"
 @pytest.fixture
 def driver():
     # Setup Sauce Labs Selenium WebDriver.
-    options = webdriver.ChromeOptions()
+    options = FirefoxOptions()
     sauce_options = {
         "username": SAUCE_USERNAME,
         "accessKey": SAUCE_ACCESS_KEY,
-        "browserName": "chrome",
+        "browserName": "firefox",
         "platformName": "macOS 11.00",
         "browserVersion": "latest",
         "name": "SauceLabs Automation for Walmart",
