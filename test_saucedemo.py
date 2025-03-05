@@ -32,7 +32,7 @@ def test_add_item_to_cart(driver):
     test_login(driver)
     driver.find_element(By.NAME, "add-to-cart-sauce-labs-backpack").click()
     cart_count = driver.find_element(By.CLASS_NAME, "shopping_cart_badge").text
-    jobStatus = "passed" if cart_count == "1" else "failed"
+    jobStatus = "passed" if cart_count == "2" else "failed"
     driver.execute_script("sauce:job-result=" + jobStatus)
 
 def test_remove_item_from_cart(driver):
